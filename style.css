@@ -388,7 +388,7 @@ section {
 }
 
 .skills-details .box {
-    width: calc(100% / 3 - 20px);
+    width: calc(50% - 10px);
     margin: 20px 0;
 }
 
@@ -605,5 +605,119 @@ footer .text span a:hover {
 
     .skills-details .boxes .per {
         font-size: 50px;
+    }
+}
+@media (max-width: 600px) {
+    .skills-details .box {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* Hover effect for skill boxes */
+.skills-details .box:hover {
+    background-color: #1e1e1e;
+    transform: scale(1.03);
+    transition: all 0.3s ease-in-out;
+}
+
+.hero-section {
+    background-image: url("home-page.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.hero-section::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 0;
+}
+
+.hero-section .main-container {
+    position: relative;
+    z-index: 1;
+}
+
+.hero-left-align {
+    text-align: left;
+    max-width: 600px;
+    margin-left: 5vw;
+}
+
+
+/* Projects & Experience title */
+.projects-title {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+/* Divider under Projects title */
+.skills-divider {
+    border: 0;
+    border-top: 1px solid #777;
+    margin-bottom: 1rem;
+    width: 80%;
+}
+
+/* Skill titles larger, text smaller, and white color for text */
+.skills-details .boxes .topic {
+    font-size: 60px;
+    color: white;
+}
+
+.skills-details .boxes .per {
+    font-size: 20px;
+    color: white;
+}
+
+
+@media (max-width: 768px) {
+    .skills .skills-details {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    .skills-details .text {
+        width: 100%;
+        text-align: center;
+    }
+
+    .skills-details .boxes {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .skills-details .box {
+        width: 100%;
+        text-align: center;
+    }
+
+    .projects-title {
+        font-size: 1.25rem;
+    }
+
+    .skills-details .boxes .topic {
+        font-size: 40px;
+    }
+
+    .skills-details .boxes .per {
+        font-size: 16px;
+    }
+
+    .skills-divider {
+        width: 60%;
     }
 }
