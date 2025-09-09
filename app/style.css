@@ -1,0 +1,723 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    text-decoration: none;
+    scroll-behavior: smooth;
+}
+
+body {
+    width: 100%;
+    height: auto;
+    background-color: black;
+    overflow-x: hidden;
+    color: #fff;
+}
+
+/* Custom Scroll Bar CSS */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #4c1ed4;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #4c1ed4;
+}
+
+/* Navbar Styling */
+nav {
+    width: 100%;
+    height: 10vh;
+}
+
+.nav-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.logo {
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.logo span {
+    color: #4c1ed4;
+    text-shadow: 0 0 10px #4c1ed4;
+}
+
+.hamburg,
+.cancel {
+    cursor: pointer;
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    color: white;
+    opacity: 0;
+    pointer-events: none;
+    font-size: clamp(2.5rem, 0.5rem + 5vw, 3rem);
+}
+
+.nav-container .links {
+    display: flex;
+}
+
+.nav-container .links a {
+    position: relative;
+    font-size: 1.2rem;
+    color: white;
+    margin: 0 20px;
+    text-decoration: none;
+    font-weight: 550;
+    transition: 0.3s linear;
+}
+
+.nav-container .links a::before {
+    position: absolute;
+    content: "";
+    bottom: -3px;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background-color: #4c1ed4;
+    transition: 0.2s linear;
+}
+
+.nav-container .links a:hover::before {
+    width: 100%;
+}
+
+.nav-container .links a:hover {
+    color: #4c1ed4;
+}
+
+/* Dropdown Menu */
+.dropdown {
+    z-index: 100;
+    position: absolute;
+    top: 0;
+    transform: translateY(-500px);
+    width: 100%;
+    height: auto;
+    backdrop-filter: blur(4px) brightness(40%);
+    box-shadow: 0 0 20px black;
+    transition: 0.2s linear;
+}
+
+.dropdown .links a {
+    display: flex;
+    color: white;
+    text-decoration: none;
+    justify-content: center;
+    padding: 15px 0;
+    align-items: center;
+    transition: 0.2s linear;
+}
+
+.dropdown .links a:hover {
+    background-color: #4c1ed4;
+}
+
+/* Section Styling */
+section {
+    width: 100%;
+    min-height: 90vh;
+}
+
+/* Main Container */
+.main-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4rem 10%;
+    gap: 2rem;
+}
+
+.main-container .image {
+    flex: 1;
+    max-width: 500px;
+    height: 80vh;
+    border-radius: 100%;
+    overflow: hidden;
+    box-shadow: 0 0 50px #4c1ed4;
+}
+
+.main-container .image img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.main-container .image:hover {
+    animation: animate 1.5s ease-in-out infinite;
+}
+
+@keyframes animate {
+    0% {
+        scale: 1;
+    }
+    50% {
+        scale: 1.05;
+    }
+    100% {
+        scale: 1;
+    }
+}
+
+.main-container .content {
+    flex: 1;
+    width: 40%;
+    padding: 2rem;
+}
+
+/* Typography */
+.content h1 {
+    font-size: clamp(1rem, 1rem + 5vw, 1.8rem);
+}
+
+.content h1 span {
+    color: #4c1ed4;
+    text-shadow: 0 0 10px #4c1ed4;
+}
+
+.content .typewriter {
+    font-size: clamp(1rem, 1rem + 5vw, 2.5rem);
+    font-weight: 600;
+}
+
+.content .typewriter-text {
+    color: #4c1ed4;
+    text-shadow: 0 0 10px #4c1ed4;
+}
+
+.content p {
+    font-size: clamp(0.4rem, 0.2rem + 9vw, 2.5rem);
+    margin: 10px 0;
+}
+
+/* Social Links */
+.social-links i {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 3rem;
+    height: 3rem;
+    background-color: transparent;
+    border: 0.2rem solid #4c1ed4;
+    border-radius: 50%;
+    color: #4c1ed4;
+    margin: 5px 15px;
+    font-size: 1.5rem;
+    transition: 0.2s linear;
+}
+
+.social-links i:hover {
+    scale: 1.3;
+    color: black;
+    background-color: #4c1ed4;
+    filter: drop-shadow(0 0 10px #4c1ed4);
+}
+
+/* Button Styles */
+.content button {
+    width: 50%;
+    height: 6vh;
+    margin: 30px;
+    background-color: #4c1ed4;
+    color: white;
+    border: none;
+    outline: none;
+    font-size: 120%;
+    font-weight: 700;
+    border-radius: 5px;
+    transition: 0.2s linear;
+}
+
+.content button:hover {
+    scale: 1.1;
+    color: #4c1ed4;
+    border: 2px solid #4c1ed4;
+    background-color: transparent;
+    font-weight: 700;
+    box-shadow: 0 0 40px #4c1ed4;
+}
+
+/* About Section */
+.about {
+    padding: 4rem 10%;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.about .about-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+}
+
+.about .left {
+    flex: 1;
+    max-width: 400px;
+}
+
+.about .left img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.about .left img:hover {
+    transform: scale(1.02);
+}
+
+.about .right {
+    flex: 1;
+    padding: 2rem;
+}
+
+/* Add these new rules for the text sizing */
+.about .right p {
+    font-size: 1rem;  /* This makes the text smaller */
+    line-height: 1.6;  /* This adds better spacing between lines */
+    text-align: justify;
+    color: #fff;
+    margin-bottom: 1rem;
+}
+
+.about .right .topic {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Section Titles */
+.title {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.title span {
+    font-size: 2.5rem;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 8px;
+    color: white;
+}
+
+.title span::before,
+.title span::after {
+    content: '';
+    position: absolute;
+    height: 3px;
+    width: 100%;
+    background: #4c1ed4;
+    left: 0;
+    bottom: 0;
+}
+
+.title span::after {
+    bottom: -7px;
+    width: 70%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Skills Section */
+.skills {
+    background: black;
+}
+
+.skills .content {
+    padding: 40px 0;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.skills .skills-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.skills-details .text {
+    width: 50%;
+}
+
+.skills-details p {
+    color: white;
+    text-align: justify;
+}
+
+.skills .skills-details .experience {
+    display: flex;
+    align-items: center;
+    margin: 0 10px;
+}
+
+.skills-details .experience .num {
+    color: white;
+    font-size: 80px;
+}
+
+.skills-details .experience .exp {
+    color: white;
+    margin-left: 20px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.skills-details .boxes {
+    width: 45%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.skills-details .box {
+    width: calc(50% - 10px);
+    margin: 20px 0;
+}
+
+.skills-details .boxes .topic {
+    font-size: 20px;
+    color: #4c1ed4;
+}
+
+.skills-details .boxes .per {
+    font-size: 60px;
+    color: #4c1ed4;
+}
+
+/* Services Section */
+.services .boxes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.services .boxes .box {
+    margin: 20px 0;
+    width: calc(100% / 3 - 20px);
+    text-align: center;
+    border-radius: 12px;
+    padding: 30px 10px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.12);
+    cursor: default;
+    color: white;
+    transition: all 0.4s ease;
+}
+
+.services .boxes .box:hover {
+    background: #4c1ed4;
+    color: #fff;
+}
+
+.services .boxes .box .icon {
+    height: 50px;
+    width: 50px;
+    background: #4c1ed4;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 50px;
+    font-size: 18px;
+    color: #fff;
+    margin: 0 auto 10px auto;
+    transition: all 0.4s ease;
+}
+
+.services .boxes .box:hover .icon {
+    background-color: #fff;
+    color: #4c1ed4;
+}
+
+.services .boxes .box:hover .topic,
+.services .boxes .box:hover p {
+    color: #fff;
+}
+
+/* Contact Section */
+.contact {
+    background: black;
+}
+
+.contact .content {
+    margin: 0 auto;
+    padding: 30px 0;
+}
+
+.contact .text {
+    width: 80%;
+    text-align: center;
+    margin: auto;
+}
+
+/* Footer */
+footer {
+    background: #4c1ed4;
+    padding: 15px 0;
+    text-align: center;
+}
+
+footer .text span {
+    font-size: 17px;
+    font-weight: 400;
+    color: #fff;
+}
+
+footer .text span a {
+    font-weight: 500;
+    color: #fff;
+}
+
+footer .text span a:hover {
+    text-decoration: underline;
+}
+
+/* Scroll Button */
+.scroll-button a {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    color: #fff;
+    background: #4c1ed4;
+    padding: 7px 12px;
+    font-size: 18px;
+    border-radius: 6px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+    display: none;
+}
+
+/* Media Queries */
+@media (max-width: 1000px) {
+    .about .about-details {
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .about .about-details .left {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .about-details .right {
+        width: 90%;
+        margin: 40px 0;
+    }
+
+    .services .boxes .box {
+        width: calc(100% / 2 - 20px);
+    }
+}
+
+@media (max-width: 968px) {
+    nav .logo {
+        position: absolute;
+        top: 16px;
+        left: 15px;
+        font-size: 1.5rem;
+    }
+
+    section .main-container {
+        padding-left: 0;
+        flex-direction: column;
+    }
+
+    .nav-container .links {
+        display: none;
+    }
+
+    .hamburg, 
+    .cancel {
+        opacity: 1;
+        pointer-events: visible;
+    }
+
+    .main-container .content {
+        margin-top: 20px;
+        width: 80%;
+    }
+
+    .social-links i {
+        width: 2.5rem;
+        height: 2.5rem;
+        font-size: 1.5rem;
+    }
+
+    .main-container .image {
+        z-index: -1;
+        width: 50%;
+        height: 60%;
+    }
+
+    .skills .skills-details {
+        flex-direction: column;
+    }
+
+    .skills-details .text {
+        width: 100%;
+        margin-bottom: 50px;
+    }
+
+    .skills-details .boxes {
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
+    .services .boxes .box {
+        width: 100%;
+    }
+
+    .contact .text {
+        width: 100%;
+    }
+}
+
+@media (max-width: 500px) {
+    .main-container .image {
+        width: 50%;
+        height: 60%;
+        margin-bottom: 0;
+    }
+
+    .main-container .content {
+        width: 80%;
+    }
+
+    .main-container button {
+        margin-top: 15px;
+    }
+
+    .skills-details .boxes .per {
+        font-size: 50px;
+    }
+}
+@media (max-width: 600px) {
+    .skills-details .box {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* Hover effect for skill boxes */
+.skills-details .box:hover {
+    background-color: #1e1e1e;
+    transform: scale(1.03);
+    transition: all 0.3s ease-in-out;
+}
+
+.hero-section {
+    background-image: url("Images/home-page.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.hero-section::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 0;
+}
+
+.hero-section .main-container {
+    position: relative;
+    z-index: 1;
+}
+
+.hero-left-align {
+    text-align: left;
+    max-width: 600px;
+    margin-left: 5vw;
+}
+
+
+/* Projects & Experience title */
+.projects-title {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+/* Divider under Projects title */
+.skills-divider {
+    border: 0;
+    border-top: 1px solid #777;
+    margin-bottom: 1rem;
+    width: 80%;
+}
+
+/* Skill titles larger, text smaller, and white color for text */
+.skills-details .boxes .topic {
+    font-size: 60px;
+    color: white;
+}
+
+.skills-details .boxes .per {
+    font-size: 20px;
+    color: white;
+}
+
+
+@media (max-width: 768px) {
+    .skills .skills-details {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    .skills-details .text {
+        width: 100%;
+        text-align: center;
+    }
+
+    .skills-details .boxes {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .skills-details .box {
+        width: 100%;
+        text-align: center;
+    }
+
+    .projects-title {
+        font-size: 1.25rem;
+    }
+
+    .skills-details .boxes .topic {
+        font-size: 40px;
+    }
+
+    .skills-details .boxes .per {
+        font-size: 16px;
+    }
+
+    .skills-divider {
+        width: 60%;
+    }
+}
