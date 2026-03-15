@@ -12,24 +12,22 @@
         <!-- Navigation Menu -->
         <nav>
             <div class="nav-container">
-                <div class="logo">
-                    <span>Adrien</span>
-                </div>
-                <div class="links">
-                    <div class="link"><a class="active" href="#">Home</a></div>
-                    <div class="link"><a href="#about">About</a></div>
-                    <div class="link"><a href="#projects">Projects</a></div>
-                    <div class="link"><a href="#contact">Contact</a></div>
-                </div>
-                <i class="fa-solid fa-bars hamburg" onclick="hamburg()"></i>
+                <button aria-label="Switch to light mode" class="menu-toggle theme-toggle" type="button">
+                    <i class="fa-solid fa-sun"></i>
+                </button>
+                <button aria-controls="site-menu" aria-expanded="false" aria-label="Open menu" class="menu-toggle hamburg" type="button">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
             </div>
-            <div class="dropdown">
+            <div aria-hidden="true" class="dropdown" id="site-menu">
                 <div class="links">
+                    <button aria-label="Close menu" class="menu-toggle cancel" type="button">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
                     <a href="#">Home</a>
                     <a href="#about">About</a>
                     <a href="#projects">Projects</a>
                     <a href="#contact">Contact</a>
-                    <i class="fa-solid fa-xmark cancel" onclick="cancel()"></i>
                 </div>
             </div>
         </nav>
@@ -64,7 +62,30 @@
                 <div class="title"><span>About Me</span></div>
                 <div class="about-details">
                     <div class="left">
-                        <img alt="About Me Image" src="Images/main.jpg"/>
+                        <div aria-label="About photo slideshow" class="about-slideshow">
+                            <div class="slides">
+                                <img alt="Adrien portrait photo 1" class="slide active" src="Images/main.jpg"/>
+                                <img alt="Adrien portrait photo 2" class="slide" src="Images/image2.jpg"/>
+                                <img alt="Adrien portrait photo 3" class="slide" src="Images/main.jpg"/>
+                                <img alt="Adrien portrait photo 4" class="slide" src="Images/image2.jpg"/>
+                                <img alt="Adrien portrait photo 5" class="slide" src="Images/main.jpg"/>
+                            </div>
+                            <div class="slide-controls">
+                                <button aria-label="Previous image" class="slide-arrow slide-prev" type="button">
+                                    <i class="fa-solid fa-chevron-left"></i>
+                                </button>
+                                <div aria-label="Slideshow navigation" class="slide-dots">
+                                    <button aria-label="Show image 1" aria-pressed="true" class="slide-dot active" data-slide="0" type="button"></button>
+                                    <button aria-label="Show image 2" aria-pressed="false" class="slide-dot" data-slide="1" type="button"></button>
+                                    <button aria-label="Show image 3" aria-pressed="false" class="slide-dot" data-slide="2" type="button"></button>
+                                    <button aria-label="Show image 4" aria-pressed="false" class="slide-dot" data-slide="3" type="button"></button>
+                                    <button aria-label="Show image 5" aria-pressed="false" class="slide-dot" data-slide="4" type="button"></button>
+                                </div>
+                                <button aria-label="Next image" class="slide-arrow slide-next" type="button">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                     <div class="right">
                         <p>
@@ -145,16 +166,31 @@
                 </span>
             </div>
         </footer>
-    </body>
-</html>
 
-<!-- Clean JS: event listeners + accessibility + escape/outside click + scroll lock -->
-  <script>
+        <!-- Clean JS: event listeners + accessibility + escape/outside click + scroll lock -->
+        <script>
     (function () {
       const body = document.body;
       const dropdown = document.querySelector('nav .dropdown');
       const hamburgBtn = document.querySelector('.hamburg');
+      const themeToggleBtn = document.querySelector('.theme-toggle');
+      const themeToggleIcon = themeToggleBtn.querySelector('i');
       const cancelBtn = document.querySelector('.cancel');
+      const menuLinks = dropdown.querySelectorAll('a');
+      const slides = document.querySelectorAll('.about-slideshow .slide');
+      const dots = document.querySelectorAll('.about-slideshow .slide-dot');
+      const prevSlideBtn = document.querySelector('.about-slideshow .slide-prev');
+      const nextSlideBtn = document.querySelector('.about-slideshow .slide-next');
+      let currentSlide = 0;
+      let slideIntervalId;
+
+      function applyTheme(theme) {
+        const isLight = theme === 'light';
+        body.dataset.theme = isLight ? 'light' : 'dark';
+        themeToggleBtn.setAttribute('aria-label', isLight ? 'Switch to dark mode' : 'Switch to light mode');
+        themeToggleIcon.className = isLight ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
+        window.localStorage.setItem('theme', body.dataset.theme);
+      }
 
       function openMenu() {
         dropdown.classList.add('open');
@@ -174,9 +210,61 @@
         dropdown.classList.contains('open') ? closeMenu() : openMenu();
       }
 
+      function renderSlide(index) {
+        slides.forEach((slide, slideIndex) => {
+          slide.classList.toggle('active', slideIndex === index);
+        });
+
+        dots.forEach((dot, dotIndex) => {
+          const isActive = dotIndex === index;
+          dot.classList.toggle('active', isActive);
+          dot.setAttribute('aria-pressed', String(isActive));
+        });
+      }
+
+      function showSlide(index) {
+        currentSlide = (index + slides.length) % slides.length;
+        renderSlide(currentSlide);
+      }
+
+      function nextSlide() {
+        showSlide(currentSlide + 1);
+      }
+
+      function previousSlide() {
+        showSlide(currentSlide - 1);
+      }
+
+      function restartSlideInterval() {
+        clearInterval(slideIntervalId);
+        slideIntervalId = window.setInterval(nextSlide, 4500);
+      }
+
+      function toggleTheme() {
+        applyTheme(body.dataset.theme === 'light' ? 'dark' : 'light');
+      }
+
       // Click
+      themeToggleBtn.addEventListener('click', toggleTheme);
       hamburgBtn.addEventListener('click', toggleMenu);
       cancelBtn.addEventListener('click', closeMenu);
+      menuLinks.forEach(link => {
+        link.addEventListener('click', closeMenu);
+      });
+      prevSlideBtn.addEventListener('click', () => {
+        previousSlide();
+        restartSlideInterval();
+      });
+      nextSlideBtn.addEventListener('click', () => {
+        nextSlide();
+        restartSlideInterval();
+      });
+      dots.forEach(dot => {
+        dot.addEventListener('click', () => {
+          showSlide(Number(dot.dataset.slide));
+          restartSlideInterval();
+        });
+      });
 
       // Keyboard
       [hamburgBtn, cancelBtn].forEach(btn => {
@@ -201,11 +289,10 @@
         }
       });
 
-      // Auto-close when resizing to desktop
-      window.addEventListener('resize', () => {
-        if (window.innerWidth > 968) closeMenu();
-      });
+      applyTheme(window.localStorage.getItem('theme') || 'dark');
+      renderSlide(currentSlide);
+      restartSlideInterval();
     })();
-  </script>
+        </script>
 </body>
 </html>

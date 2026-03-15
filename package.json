@@ -1,0 +1,25 @@
+{
+  "name": "portfolio-website",
+  "version": "1.0.0",
+  "description": "This is my personal portfolio website that showcases my progress as an aspiring software engineer and computer science major.",
+  "main": "index.js",
+  "scripts": {
+    "start": "http-server -p 8000 -c-1",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/burzurio/portfolio-website.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/burzurio/portfolio-website/issues"
+  },
+  "homepage": "https://github.com/burzurio/portfolio-website#readme",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}
