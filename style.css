@@ -292,6 +292,8 @@ section { width: 100%; min-height: 90vh; }
     min-height: 1.15em;
     white-space: nowrap;
     overflow: hidden;
+    font-family: "Cascadia Code", "Fira Code", "IBM Plex Mono", "Consolas", monospace;
+    letter-spacing: -0.03em;
 }
 
 .hero-typed-line.is-typing {
@@ -310,6 +312,7 @@ section { width: 100%; min-height: 90vh; }
     font-size: clamp(2.2rem, 1.5rem + 3.8vw, 4.25rem);
     line-height: 1.02;
     margin-bottom: 0.5rem;
+    font-weight: 700;
     color: var(--neon-primary);
     text-shadow: 0 0 18px rgba(59, 130, 246, 0.26);
 }
@@ -317,6 +320,7 @@ section { width: 100%; min-height: 90vh; }
 .hero-role {
     font-size: clamp(2rem, 1.35rem + 4vw, 4rem);
     line-height: 1.06;
+    font-weight: 700;
     color: var(--text-main);
     margin-bottom: 0.45rem;
 }
@@ -324,6 +328,7 @@ section { width: 100%; min-height: 90vh; }
 .hero-school {
     font-size: clamp(1.35rem, 1rem + 2.3vw, 2.6rem);
     line-height: 1.15;
+    font-weight: 600;
     color: var(--text-muted);
     margin-bottom: 1.6rem;
 }

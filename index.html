@@ -37,7 +37,7 @@
             <div class="main-container">
                 <div class="content hero-left-align">
                     <p class="hero-typed-line hero-intro" data-text="Hi, I'm Adrien Beavers,"></p>
-                    <div class="typewriter hero-typed-line hero-role" data-text="a CS Major at PSU!"></div>
+                    <div class="typewriter hero-typed-line hero-role" data-alt-text="a SWE at Teledyne FLIR!" data-text="a CS Major at PSU!"></div>
                     <div class="social-links">
                         <a href="https://github.com/burzurio" target="_blank">
                             <i class="fa-brands fa-github"></i>
@@ -177,7 +177,9 @@
       const heroTypedLines = document.querySelectorAll('.hero-typed-line');
       let currentSlide = 0;
       let slideIntervalId;
+      const heroRoleLine = document.querySelector('.hero-role');
       let heroTypingTimeoutId;
+      let heroSwapTimeoutId;
 
       function applyTheme(theme) {
         const isLight = theme === 'light';
@@ -239,6 +241,11 @@
         applyTheme(body.dataset.theme === 'light' ? 'dark' : 'light');
       }
 
+      function clearHeroTimers() {
+        window.clearTimeout(heroTypingTimeoutId);
+        window.clearTimeout(heroSwapTimeoutId);
+      }
+
       function typeText(element, text, speed) {
         return new Promise(resolve => {
           let index = 0;
@@ -275,6 +282,8 @@
       }
 
       async function runHeroTypingAnimation() {
+        clearHeroTimers();
+
         for (const line of heroTypedLines) {
           await typeText(line, line.dataset.text || '', 42);
           await new Promise(resolve => window.setTimeout(resolve, 160));
@@ -285,12 +294,30 @@
           lastLine.classList.add('is-typing');
         }
 
+        heroSwapTimeoutId = window.setTimeout(() => {
+          runHeroRoleSwapAnimation();
+        }, 5000);
+
         heroTypingTimeoutId = window.setTimeout(() => {
           runHeroEraseAnimation();
         }, 10000);
       }
 
+      async function runHeroRoleSwapAnimation() {
+        if (!heroRoleLine) {
+          return;
+        }
+
+        heroRoleLine.classList.add('is-typing');
+        await eraseText(heroRoleLine, 18);
+        await new Promise(resolve => window.setTimeout(resolve, 120));
+        await typeText(heroRoleLine, heroRoleLine.dataset.altText || '', 40);
+        heroRoleLine.classList.add('is-typing');
+      }
+
       async function runHeroEraseAnimation() {
+        clearHeroTimers();
+
         for (const line of Array.from(heroTypedLines).reverse()) {
           line.classList.add('is-typing');
           await eraseText(line, 18);
@@ -346,7 +373,7 @@
       applyTheme(window.localStorage.getItem('theme') || 'dark');
       renderSlide(currentSlide);
       restartSlideInterval();
-      window.clearTimeout(heroTypingTimeoutId);
+      clearHeroTimers();
       runHeroTypingAnimation();
     })();
         </script>
