@@ -35,16 +35,10 @@
         <section class="hero-section">
             <div class="main-container">
                 <div class="content hero-left-align">
-                    <h1 data-aos="fade-left">
-                        Hi, I'm
-                        <span>Adrien Beavers,</span>
-                    </h1>
-                    <div class="typewriter">
-                        a Computer Science major
-                        <span class="typewriter-text"></span>
-                        <label></label>
-                    </div>
-                    <p>at Portland State University!</p>
+                    <p class="hero-typed-line hero-intro" data-text="Hi, I'm "></p>
+                    <h1 class="hero-typed-line hero-name" data-text="Adrien Beavers,"></h1>
+                    <div class="typewriter hero-typed-line hero-role" data-text="a Computer Science major"></div>
+                    <p class="hero-typed-line hero-school" data-text="at Portland State University!"></p>
                     <div class="social-links">
                         <a href="https://github.com/burzurio" target="_blank">
                             <i class="fa-brands fa-github"></i>
@@ -181,8 +175,10 @@
       const dots = document.querySelectorAll('.about-slideshow .slide-dot');
       const prevSlideBtn = document.querySelector('.about-slideshow .slide-prev');
       const nextSlideBtn = document.querySelector('.about-slideshow .slide-next');
+      const heroTypedLines = document.querySelectorAll('.hero-typed-line');
       let currentSlide = 0;
       let slideIntervalId;
+      let heroTypingTimeoutId;
 
       function applyTheme(theme) {
         const isLight = theme === 'light';
@@ -244,6 +240,69 @@
         applyTheme(body.dataset.theme === 'light' ? 'dark' : 'light');
       }
 
+      function typeText(element, text, speed) {
+        return new Promise(resolve => {
+          let index = 0;
+          element.textContent = '';
+          element.classList.add('is-typing');
+
+          const timer = window.setInterval(() => {
+            element.textContent += text.charAt(index);
+            index += 1;
+
+            if (index >= text.length) {
+              window.clearInterval(timer);
+              element.classList.remove('is-typing');
+              resolve();
+            }
+          }, speed);
+        });
+      }
+
+      function eraseText(element, speed) {
+        return new Promise(resolve => {
+          element.classList.add('is-typing');
+
+          const timer = window.setInterval(() => {
+            element.textContent = element.textContent.slice(0, -1);
+
+            if (element.textContent.length === 0) {
+              window.clearInterval(timer);
+              element.classList.remove('is-typing');
+              resolve();
+            }
+          }, speed);
+        });
+      }
+
+      async function runHeroTypingAnimation() {
+        for (const line of heroTypedLines) {
+          await typeText(line, line.dataset.text || '', 42);
+          await new Promise(resolve => window.setTimeout(resolve, 160));
+        }
+
+        const lastLine = heroTypedLines[heroTypedLines.length - 1];
+        if (lastLine) {
+          lastLine.classList.add('is-typing');
+        }
+
+        heroTypingTimeoutId = window.setTimeout(() => {
+          runHeroEraseAnimation();
+        }, 10000);
+      }
+
+      async function runHeroEraseAnimation() {
+        for (const line of Array.from(heroTypedLines).reverse()) {
+          line.classList.add('is-typing');
+          await eraseText(line, 18);
+          await new Promise(resolve => window.setTimeout(resolve, 80));
+        }
+
+        heroTypingTimeoutId = window.setTimeout(() => {
+          runHeroTypingAnimation();
+        }, 220);
+      }
+
       // Click
       themeToggleBtn.addEventListener('click', toggleTheme);
       hamburgBtn.addEventListener('click', toggleMenu);
@@ -292,6 +351,8 @@
       applyTheme(window.localStorage.getItem('theme') || 'dark');
       renderSlide(currentSlide);
       restartSlideInterval();
+      window.clearTimeout(heroTypingTimeoutId);
+      runHeroTypingAnimation();
     })();
         </script>
 </body>
