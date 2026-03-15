@@ -31,14 +31,13 @@
                 </div>
             </div>
         </nav>
+
         <!-- Hero Section -->
         <section class="hero-section">
             <div class="main-container">
                 <div class="content hero-left-align">
-                    <p class="hero-typed-line hero-intro" data-text="Hi, I'm "></p>
-                    <h1 class="hero-typed-line hero-name" data-text="Adrien Beavers,"></h1>
-                    <div class="typewriter hero-typed-line hero-role" data-text="a Computer Science major"></div>
-                    <p class="hero-typed-line hero-school" data-text="at Portland State University!"></p>
+                    <p class="hero-typed-line hero-intro" data-text="Hi, I'm Adrien Beavers,"></p>
+                    <div class="typewriter hero-typed-line hero-role" data-text="a CS Major at PSU!"></div>
                     <div class="social-links">
                         <a href="https://github.com/burzurio" target="_blank">
                             <i class="fa-brands fa-github"></i>
@@ -46,10 +45,14 @@
                         <a href="https://www.linkedin.com/in/adrien-beavers-" target="_blank">
                             <i class="fa-brands fa-linkedin"></i>
                         </a>
+                        <a aria-label="LeetCode profile" href="https://leetcode.com/u/burzurio/" target="_blank">
+                            <i class="fa-solid fa-code"></i>
+                        </a>
                     </div>
                 </div>
             </div>
         </section>
+
         <!-- About Section -->
         <section class="about" id="about">
             <div class="content">
@@ -83,16 +86,13 @@
                     </div>
                     <div class="right">
                         <p>
-                        I'm a first-generation college student, born and raised in Portland, Oregon.
+                        I'm a Computer Science student at Portland State University, and a software engineering intern through the MECOP program. I've been interested in computers and programming for as long as I can remember. What started as curiosity about how video games work turned into a passion for building software that solves problems.
                         </p>
                         <p>
-                        My passion for computer science and programming comes from a lifelong fascination with creating and building things using computers. Ever since I was a kid, I’ve been captivated by the idea of turning ideas into reality through code. That curiosity led me to take a PLTW class in 6th grade, and it stuck with me ever since.
+                        That passion continues to grow as I progress through my college journey and enter the start of my career. Right now I'm building my experience through coursework, internships, and personal projects, while continuing to deepen my understanding of how software systems are designed, built, and maintained.
                         </p>
                         <p>
-                        I’m working toward becoming a software engineer with a focus on full stack development. While I’m still gaining experience, I’m also deeply interested in how data privacy works in real-world systems, especially when it comes to databases and cloud applications.
-                        </p>
-                        <p>
-                        Outside of school, I work part-time as a Field Services Technician. In my free time, I enjoy going for drives, jogging, and hiking.
+                        Outside of coding, I enjoy staying active and spending time outdoors. Whether it's going for runs, exploring hiking trails around Oregon, or just getting out for a long drive, I like finding ways to reset and stay balanced outside of school and work.
                         </p>
                         <div class="button">
                             <a href="Docs/Resume-9-10.pdf" target="_blank">
@@ -103,32 +103,30 @@
                 </div>
             </div>
         </section>
+
         <!-- Projects & Contributions Section -->
         <section class="skills" id="projects">
             <div class="content">
                 <div class="title"><span>Projects & Contributions</span></div>
                 <div class="projects">
-                    <!-- Viking Grades -->
                     <div class="project">
-                        <img src="Images/vikinggrades-logo.png" alt="Viking Grades Logo" class="project-logo" />
+                        <img alt="Viking Grades Logo" class="project-logo" src="Images/vikinggrades-logo.png"/>
                         <div class="project-info">
                             <h3>Viking Grades</h3>
                             <p>Academic data visualization and course search tool. Built interactive UI components with React Native and Tailwind CSS to improve grade transparency and usability.</p>
                         </div>
                     </div>
 
-                    <!-- EduPrivacy / myPals -->
                     <div class="project">
-                        <img src="Images/mypals-logo.png" alt="EduPrivacy (myPals) Logo" class="project-logo" />
+                        <img alt="EduPrivacy (myPals) Logo" class="project-logo" src="Images/mypals-logo.png"/>
                         <div class="project-info">
                             <h3>EduPrivacy (myPals)</h3>
                             <p>Privacy education project promoting digital literacy for kids. Contributed backend features and code refinements to support secure data handling and a positive learning experience.</p>
                         </div>
                     </div>
 
-                    <!-- CM Banh Mi Website -->
                     <div class="project">
-                        <img src="Images/cm-banhmi-logo.png" alt="CM Banh Mi Logo" class="project-logo" />
+                        <img alt="CM Banh Mi Logo" class="project-logo" src="Images/cm-banhmi-logo.png"/>
                         <div class="project-info">
                             <h3>CM Banh Mi Website</h3>
                             <p>Restaurant website built with Next.js, TypeScript, Tailwind CSS, and Framer Motion. Implemented responsive pages, interactive menus, and branding-aligned animations.</p>
@@ -137,6 +135,7 @@
                 </div>
             </div>
         </section>
+
         <!-- Contact Section -->
         <section class="contact" id="contact">
             <div class="content">
@@ -150,18 +149,18 @@
                 </div>
             </div>
         </section>
+
         <!-- Footer -->
         <footer>
             <div class="text">
                 <span>
-                    Created By 
+                    Created By
                     <a href="#">burzurio</a>
-                    © 2024 All Rights Reserved
+                    &copy; 2024 All Rights Reserved
                 </span>
             </div>
         </footer>
 
-        <!-- Clean JS: event listeners + accessibility + escape/outside click + scroll lock -->
         <script>
     (function () {
       const body = document.body;
@@ -303,7 +302,6 @@
         }, 220);
       }
 
-      // Click
       themeToggleBtn.addEventListener('click', toggleTheme);
       hamburgBtn.addEventListener('click', toggleMenu);
       cancelBtn.addEventListener('click', closeMenu);
@@ -325,7 +323,6 @@
         });
       });
 
-      // Keyboard
       [hamburgBtn, cancelBtn].forEach(btn => {
         btn.addEventListener('keydown', e => {
           if (e.key === 'Enter' || e.key === ' ') {
@@ -335,12 +332,10 @@
         });
       });
 
-      // Escape to close
       document.addEventListener('keydown', e => {
         if (e.key === 'Escape') closeMenu();
       });
 
-      // Click outside to close
       document.addEventListener('click', e => {
         const nav = dropdown.closest('nav');
         if (nav && !nav.contains(e.target) && dropdown.classList.contains('open')) {
@@ -355,5 +350,5 @@
       runHeroTypingAnimation();
     })();
         </script>
-</body>
+    </body>
 </html>
