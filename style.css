@@ -124,14 +124,19 @@ body[data-theme="light"] {
 }
 
 /* Custom Scroll Bar CSS */
+html {
+    scrollbar-color: #6f6f6f #000;
+    scrollbar-width: thin;
+}
+
 ::-webkit-scrollbar { width: 10px; }
-::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.08); }
+::-webkit-scrollbar-track { background: #000; }
 ::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, var(--neon-primary), var(--neon-secondary));
+    background: linear-gradient(180deg, #7a7a7a, #525252);
     border-radius: 12px;
     transition: all 0.3s ease;
 }
-::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, var(--neon-soft), var(--neon-secondary)); }
+::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, #909090, #666666); }
 
 /* Navbar Styling */
 nav {
@@ -476,19 +481,21 @@ section { width: 100%; min-height: 90vh; }
 .slide-arrow {
     width: 44px;
     height: 44px;
-    border: 1px solid rgba(59, 130, 246, 0.28);
+    border: 1px solid rgba(255, 255, 255, 0.18);
     border-radius: 50%;
-    background: var(--slide-arrow-bg);
-    color: var(--text-main);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.82);
+    backdrop-filter: blur(16px) saturate(130%);
+    -webkit-backdrop-filter: blur(16px) saturate(130%);
     cursor: pointer;
-    transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
 .slide-arrow:hover {
-    background: var(--slide-arrow-hover-bg);
-    border-color: rgba(59, 130, 246, 0.48);
+    background: rgba(255, 255, 255, 0.14);
+    border-color: rgba(255, 255, 255, 0.28);
+    color: rgba(255, 255, 255, 0.96);
 }
 
 .slide-controls {
@@ -506,20 +513,19 @@ section { width: 100%; min-height: 90vh; }
 }
 
 .slide-dot {
-    width: 9px;
+    width: 3px;
     height: 9px;
     border: 0;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.38);
-    box-shadow: 0 0 0 1px rgba(8, 14, 30, 0.45);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.22);
+    box-shadow: none;
     cursor: pointer;
-    transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.2s ease, background 0.2s ease, opacity 0.2s ease;
 }
 
 .slide-dot.active {
-    background: var(--neon-primary);
-    box-shadow: 0 0 10px rgba(59, 130, 246, 0.32);
-    transform: scale(1.12);
+    background: rgba(255, 255, 255, 0.72);
+    transform: scaleY(1.18);
 }
 .about .right {
     flex: 1;
